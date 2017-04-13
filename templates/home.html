@@ -1,28 +1,40 @@
 <html>
     <head>
+        <link href="{{ url_for('static', filename='style.css', _external=True)}}" rel="stylesheet">
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Headlines</title>
     </head>
     <body>
-        <h1>Headlines</h1>
-        <h2>Current weather</h2>
-        <form>
-            <input type="text" name="city" placeholder="weather search">
-            <input type="submit" value="Submit">
-        </form>
 
-        <p>城市: <b>{{weather.city}}</b></p>
-        <p>{{weather.description}} |{{weather.temperature}}&#8451;</p>
+        <div id="header">
+            <div id="inner-header">
+                <h1>Headlines</h1>
+            </div>
+        </div>
 
-        <form>
-            <input type="text" name="publication" placeholder="search" />
-            <input type="submit" value="Submit" />
-        </form>
+        <div id="main">
+            <h2>Current weather</h2>
+            <form>
+                <input type="text" name="city" placeholder="weather search">
+                <input type="submit" value="Submit">
+            </form>
 
-        {% for article in articles %}
-            <b><a href="{{article.link}}">{{article.title}}</a></b><br />
-            <i>{{article.published}}</i><br />
-            <p>{{article.summary}}</p>
-            <hr />
-        {% endfor %}
+            <p>城市: <b>{{weather.city}}</b></p>
+            <p>{{weather.description}} |{{weather.temperature}}&#8451;</p>
+
+            <form>
+                <input type="text" name="publication" placeholder="search" />
+                <input type="submit" value="Submit" />
+            </form>
+
+            {% for article in articles %}
+                <b><a href="{{article.link}}">{{article.title}}</a></b><br />
+                <i>{{article.published}}</i><br />
+                <p>{{article.summary}}</p>
+                <hr />
+            {% endfor %}
+        </div>
+
     </body>
 </html>
