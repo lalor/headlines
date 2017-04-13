@@ -4,8 +4,11 @@
     </head>
     <body>
         <h1>Headlines</h1>
-        <b>{{article.title}}</b><br />
-        <i>{{article.published}}</i><br />
-        <p>{{article.summary}}</p>
+        {% for article in articles %}
+            <b>{{article.title}}</b><br />
+            <i>{{article.published}}</i><br />
+            <p>{{article.summary}}</p>
+            <hr />
+        {% endfor %}
     </body>
 </html>
