@@ -4,7 +4,16 @@
     </head>
     <body>
         <h1>Headlines</h1>
-        <form action="/", method="POST">
+        <h2>Current weather</h2>
+        <form>
+            <input type="text" name="city" placeholder="weather search">
+            <input type="submit" value="Submit">
+        </form>
+
+        <p>城市: <b>{{weather.city}}</b></p>
+        <p>{{weather.description}} |{{weather.temperature}}&#8451;</p>
+
+        <form>
             <input type="text" name="publication" placeholder="search" />
             <input type="submit" value="Submit" />
         </form>
