@@ -6,12 +6,25 @@ from flask import Flask
 
 app = Flask(__name__)
 
-ZHIHU_FEED = "https://www.zhihu.com/rss"
+RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
+            "netease": "http://news.163.com/special/00011K6L/rss_newsattitude.xml",
+            "songshuhui": "http://songshuhui.net/feed",
+            "ifeng": "http://news.ifeng.com/rss/index.xml"}
 
 
 @app.route('/')
-def get_news():
-    feed = feedparser.parse(ZHIHU_FEED)
+@app.route('/zhihu')
+def zhihu():
+    return get_news('zhihu')
+
+
+@app.route('/netease')
+def netease():
+    return get_news('netease')
+
+
+def get_news(publication):
+    feed = feedparser.parse(RSS_FEED[publication])
     first_content = feed['entries'][0]
     html_format = """
     <html> <body>
