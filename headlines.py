@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 import feedparser
-from flask import Flask
+from flask import Flask, render_template
 
 
 app = Flask(__name__)
@@ -17,17 +17,11 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
 def get_news(publication="zhihu"):
     feed = feedparser.parse(RSS_FEED[publication])
     first_content = feed['entries'][0]
-    html_format = """
-    <html> <body>
-        <h1> Zhihu Headlines </h1>
-        <b> {0} </b> <br/>
-        <i> {1} </i> <br/>
-        <p> {2} </p> <br/>
-    <body> </html>"""
 
-    return html_format.format(first_content.get('title'),
-                              first_content.get('published'),
-                              first_content.get('summary'))
+    entry = dict(title=first_content.get('title'),
+                 published=first_content.get('published'),
+                 summary=first_content.get('summary'))
+    return render_template('home.html', **entry)
 
 
 if __name__ == '__main__':
