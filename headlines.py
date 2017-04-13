@@ -13,17 +13,8 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
 
 
 @app.route('/')
-@app.route('/zhihu')
-def zhihu():
-    return get_news('zhihu')
-
-
-@app.route('/netease')
-def netease():
-    return get_news('netease')
-
-
-def get_news(publication):
+@app.route('/<publication>')
+def get_news(publication="zhihu"):
     feed = feedparser.parse(RSS_FEED[publication])
     first_content = feed['entries'][0]
     html_format = """
